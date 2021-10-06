@@ -1,6 +1,7 @@
 defmodule Learningspace do
   @initial_position {0, 0}
 
+  @spec move_left :: {0, 0}
   def move_left() do
     @initial_position
   end
@@ -23,5 +24,17 @@ defmodule Learningspace do
   @spec move_left(tuple(), non_neg_integer()) :: tuple()
   def move_left({x, y}, amount) when is_integer(amount) and amount > 0 do
     {x + amount, y}
+  end
+
+  # File.read("database.csv")
+  # => {:ok, "content"}
+  # => {:error, :enoent}
+  @spec load :: {:error, atom} | {:ok, binary}
+  def load() do
+    File.read("database.csv")
+    |> case do
+      {:error, _} -> {:ok, ""}
+      resolved -> resolved
+    end
   end
 end
